@@ -20,32 +20,30 @@ export class TasksService {
 	// 	return this.tasks;
 	// }
 
-	// /**
-	//  * Create a new task.
-	//  *
-	//  * @param title
-	//  * @param description
-	//  * @returns Task
-	//  */
-	// public createNewTask(createTaskDto: CreateTaskDto): Task {
-	// 	const { title, description, status } = createTaskDto;
-	// 	const task = {
-	// 		id: uuid(),
-	// 		title: title,
-	// 		description: description,
-	// 		status: status,
-	// 	};
-	// 	// Push new task into the tasks array
-	// 	this.tasks.push(task);
-	// 	return task;
-	// }
+	/**
+	 * Create a new task.
+	 *
+	 * @param title
+	 * @param description
+	 * @returns Task
+	 */
+	public async createNewTask(createTaskDto: CreateTaskDto): Promise<Task> {
+		const { title, description, status } = createTaskDto;
+		const task = this.taskRepository.create({
+			title,
+			description,
+			status: status,
+		});
+		await this.taskRepository.save(task);
+		return task;
+	}
 
-	// /**
-	//  * Find a task by ID
-	//  *
-	//  * @param id string
-	//  * @returns Task
-	//  */
+	/**
+	 * Find a task by ID
+	 *
+	 * @param id string
+	 * @returns Task
+	 */
 	public async getTaskById(id: string): Promise<Task> {
 		const found = await this.taskRepository.findOne(id);
 

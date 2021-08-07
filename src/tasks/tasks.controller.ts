@@ -31,16 +31,16 @@ export class TasksController {
 	// 	}
 	// }
 
-	// /**
-	//  * Create new task from http.
-	//  *
-	//  * @param createTaskDto
-	//  * @returns Task
-	//  */
-	// @Post()
-	// public createNewTask(@Body() createTaskDto: CreateTaskDto): Task {
-	// 	return this.tasksService.createNewTask(createTaskDto);
-	// }
+	/**
+	 * Create new task from http.
+	 *
+	 * @param createTaskDto
+	 * @returns Task
+	 */
+	@Post()
+	public createNewTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+		return this.tasksService.createNewTask(createTaskDto);
+	}
 
 	/**
 	 * Get a specific task
