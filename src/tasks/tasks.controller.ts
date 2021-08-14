@@ -18,18 +18,14 @@ import { TasksService } from './tasks.service';
 export class TasksController {
 	constructor(private tasksService: TasksService) {}
 
-	// /**
-	//  * Get all tasks and send to http response.
-	//  * @returns Task
-	//  */
-	// @Get()
-	// public getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
-	// 	if (Object.keys(filterDto).length) {
-	// 		return this.tasksService.getTasksWithFilter(filterDto);
-	// 	} else {
-	// 		return this.tasksService.getAllTasks();
-	// 	}
-	// }
+	/**
+	 * Get all tasks and send to http response.
+	 * @returns Task
+	 */
+	@Get()
+	public getTasks(@Query() filterDto: GetTasksFilterDto): Promise<Task[]> {
+		return this.tasksService.getTasks(filterDto);
+	}
 
 	/**
 	 * Create new task from http.
@@ -52,21 +48,21 @@ export class TasksController {
 		return this.tasksService.getTaskById(params);
 	}
 
-	// @Patch(':id')
-	// public updateTaskById(
-	// 	@Param('id') id: string,
-	// 	@Body() body: UpdateTaskDto,
-	// ): Task {
-	// 	return this.tasksService.updateTaskById(id, body);
-	// }
+	@Patch(':id')
+	public updateTaskById(
+		@Param('id') id: string,
+		@Body() body: UpdateTaskDto,
+	): Promise<Task> {
+		return this.tasksService.updateTaskById(id, body);
+	}
 
-	// /**
-	//  * Delete a task
-	//  * @param id
-	//  * @returns void
-	//  */
-	// @Delete(':id')
-	// public delteTask(@Param('id') id): void {
-	// 	return this.tasksService.deleteTask(id);
-	// }
+	/**
+	 * Delete a task
+	 * @param id
+	 * @returns void
+	 */
+	@Delete(':id')
+	public delteTask(@Param('id') id): Promise<void> {
+		return this.tasksService.deleteTask(id);
+	}
 }
