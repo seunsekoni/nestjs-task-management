@@ -13,5 +13,6 @@ export class User {
 	password: string;
 
 	@OneToMany((type) => Task, (task) => task.user, { eager: true })
+	// Eager load the tasks relationship which is set to true.
 	tasks: Task[];
 }
